@@ -1,0 +1,88 @@
+$primary-color: #8b4513;
+$secondary-color: #f4a460;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #d2691e;
+
+header {
+    background: $primary-color;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.hero-section {
+    height: 100vh;
+    background-image: url('/hero.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+  .hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #F5EBE0;
+  }
+  .hero-section p {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #F5EBE0;
+  }
+
+.books {
+    text-align: center;
+    padding: 40px;
+    width: 100vw;
+    box-sizing: border-box;
+
+    .book-list {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .book {
+        background: white;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 200px;
+
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            background: $button-color;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: $primary-color;
+    color: white;
+    width: 100vw;
+    box-sizing: border-box;
+
+}
+
