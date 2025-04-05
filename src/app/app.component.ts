@@ -9,16 +9,17 @@ import { KonyvlistaComponent } from './pages/konyvlista/konyvlista.component';
 import { KonyvreszletekComponent } from './pages/konyvreszletek/konyvreszletek.component';
 import { LoginComponent } from './pages/login/login.component';
 import { KosarComponent } from './pages/kosar/kosar.component';
+import { TBRComponent } from "./pages/tasks/tbr.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, ProfileComponent, MenuComponent, NgIf, RegistrateComponent, KonyvlistaComponent, KonyvreszletekComponent, LoginComponent, KosarComponent],
+  imports: [RouterOutlet, HomeComponent, ProfileComponent, MenuComponent, NgIf, RegistrateComponent, KonyvlistaComponent, KonyvreszletekComponent, LoginComponent, KosarComponent, TBRComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'konyv-webshop';
-  page = "home";
+  page = 'home';
   changePage(selectedPage: string){
     this.page = selectedPage;
   }

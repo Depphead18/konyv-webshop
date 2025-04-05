@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" style="margin-top: 50px;">
+        <div class="header">
+            <h2>{{ title }}</h2>
+            <div class="input-group">
+                <input type="text" placeholder="Új könyv hozzáadása" [(ngModel)]="newBookName">
+                <select [(ngModel)]="newBookPriority">
+                    <option value="Magas">Magas</option>
+                    <option value="Közepes">Közepes</option>
+                    <option value="Alacsony">Alacsony</option>
+                </select>
+                <button (click)="addBook()">Hozzáadás</button>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Státusz</th>
+                    <th>Cím</th>
+                    <th>Prioritás</th>
+                    <th>Felvétel dátuma</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let konyv of konyvek; trackBy: trackById">
+                    <td><input type="checkbox" [checked]="konyv.completed" (change)="toggleBookCompletion(konyv)"></td>
+                    <td [class.completed]="konyv.completed" [appCustomColor]="konyv.completed" appHighlightOnHover>{{ konyv.title }}</td>
+                    <td><span class="priority {{ konyv.priority.toLowerCase() }}">{{ konyv.priority }}</span></td>
+                    <td>{{ konyv.dueDate | dateFormatter }}</td>
+                    <td><a href="#" class="edit-link">Törlés</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
