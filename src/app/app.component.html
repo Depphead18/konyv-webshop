@@ -1,6 +1,6 @@
 <!--<router-outlet />-->
 
-<app-menu (selectedPage)="changePage($event)"></app-menu>
+<!---<app-menu (selectedPage)="changePage($event)"></app-menu>
 @switch (page) {
   @case ('home') {
     <div class="home">
@@ -31,4 +31,7 @@
   @default {
     <h1>Page not found ...</h1>
   }
-}
+  }-->
+
+<app-menu></app-menu>
+<router-outlet />
