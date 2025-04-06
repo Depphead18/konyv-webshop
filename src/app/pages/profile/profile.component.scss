@@ -24,6 +24,7 @@ $button-color: #C6AD94;
   mat-card {
     margin-bottom: 20px;
     color: $primary-color;
+    align-items: center;
   }
   
   mat-card-header {
@@ -84,3 +85,24 @@ $button-color: #C6AD94;
       margin-right: 8px;
     }
   }
+
+  .logout-button {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 10px 24px;
+    border: rgb(106, 0, 0);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+  
+    mat-icon {
+      margin-right: 8px;
+    }
+  
+    &:hover {
+      background-color: darken(red, 10%);
+    }
+  }
+  
