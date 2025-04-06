@@ -1,0 +1,74 @@
+$primary-color: #8b4513;
+$secondary-color: #CBBEB3;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #C6AD94;
+
+
+
+h1{
+  font-size: 50px;
+  letter-spacing: 3px;
+  text-align: center;
+  color: #3e2723;
+}
+
+.books {
+    padding: 40px;
+    background-color: $button-color;
+    
+  
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      gap: 24px;
+      padding: 32px;
+      justify-items: center;
+    
+      .example-card {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    
+        img[mat-card-image] {
+          width: auto;
+          height: auto;
+          border-radius: 8px;
+        }
+    
+        mat-card-title {
+          font-size: 20px;
+          font-weight: bold;
+        }
+    
+        mat-card-subtitle {
+          font-size: 14px;
+          color: #666;
+        }
+    
+        mat-card-content {
+          font-size: 13px;
+          color: #555;
+        }
+
+        mat-card-content p{
+          font-size: 18px;
+          color: #555;
+        }
+    
+        mat-card-actions {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        mat-card-header,
+        mat-card-content,
+        mat-card-actions {
+          text-align: left; 
+        }
+      }    
+    }
+  }

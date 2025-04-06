@@ -1,0 +1,51 @@
+$primary-color: #8b4513;
+$secondary-color: #CBBEB3;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #C6AD94;
+
+.registrate-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: white;
+
+    h1 {
+        margin-bottom: 20px;
+        color: $primary-color;
+        font-size: 50px;
+      }
+  }
+  
+  .registrate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .name-row {
+    display: flex;
+    gap: 16px;
+  }
+  
+  form button{
+    background-color: $primary-color;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 576px) {
+    .name-row, .buttons-row {
+      flex-direction: column;
+    }
+  }

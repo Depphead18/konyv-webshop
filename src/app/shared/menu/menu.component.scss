@@ -1,39 +1,26 @@
-nav {
-    background: #8b4513;
-    padding: 15px;
-    text-align: center;
-    width: 100vw;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    
+$primary-color: #8C6954;
+$secondary-color: #D99982;
+$text-color: #F2C6AC;
+$background-color: #3f1b13;
+$button-color: #0D0D0D;
 
-    ul {
-        list-style: none;
-        padding: 0px;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-
-        li {
-            margin: 0 15px;
-            cursor: pointer;
-
-            a {
-                color: white;
-                text-decoration: none;
-                font-weight: bold;
-                transition: color 0.3s;
-
-                &:hover {
-                    color: #f4a460;
-                }
-            }
-        }
-    }
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 0 !important;
 }
 
+.mdc-list-item:focus::before {
+    opacity: 0 !important;
+}
+
+.active-list-item {
+    background-color: $primary-color;
+    color: white;
+    font-weight: bold;
+}
+
+mat-nav-list {
+    min-width: 200px;
+}

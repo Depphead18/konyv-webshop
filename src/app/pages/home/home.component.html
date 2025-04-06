@@ -1,40 +1,38 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Könyves Webshop</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
 <body>
-    <main>
-        <section class="hero-section">
-            <div class="container">
-              <h1>Üdvözlünk a könyvesboltunkban!</h1>
-              <p class="lead">Élményekben és könyvekben gazdag vásárlást kívánunk!</p>
-              <a href="/konyveink">Vásárlás</a>
-            </div>
-          </section>
-        <section class="books">
-            <h2>Legújabb könyveink</h2>
-            <div class="book-list">
-                <div class="book">
-                    <!-- <img src="book1.jpg" alt="Könyv 1"> -->
-                    <h3>Könyv címe</h3>
-                    <p>Rövid leírás...</p>
-                    <a href="#" class="btn">Megnézem</a>
-                </div>
-                <div class="book">
-                    <!-- <img src="book2.jpg" alt="Könyv 2"> -->
-                    <h3>Könyv címe</h3>
-                    <p>Rövid leírás...</p>
-                    <a href="#" class="btn">Megnézem</a>
-                </div>
-            </div>
+<main>
+    <section class="hero-section">
+        <div class="container">
+          <h1>Üdvözlünk a könyvesboltunkban!</h1>
+          <p class="lead">Élményekben és könyvekben gazdag vásárlást kívánunk!</p>
+          
+          <mat-card-actions class="kozepre">
+            <button mat-flat-button class="cta-button" (click)="changePage()">
+              Vásárlás
+            </button>
+          </mat-card-actions>
+        </div>
+    </section>
+
+
+    <section class="books">
+        <h2>Jelenlegi TOP 5 könyvünk</h2>
+
+        <section class="books-grid">
+          <div class="book-card" *ngFor="let book of topBooks">
+            <mat-card class="example-card" appearance="outlined">
+              <img *ngIf="book.image" mat-card-image [src]="book.image" [alt]="book.title" />
+              <mat-card-header>
+                <mat-card-title>{{ book.title }}</mat-card-title>
+                <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Egy poszt-apokaliptikus világban játszódó regény a Setét Torony nyomában.</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button color="primary">RÉSZLETEK</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Könyves Webshop. Minden jog fenntartva.</p>
-    </footer>
-</body>
-</html>
+    </section>
+</main>

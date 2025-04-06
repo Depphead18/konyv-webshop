@@ -1,33 +1,82 @@
 $primary-color: #8b4513;
-$secondary-color: #f4a460;
+$secondary-color: #CBBEB3;
 $text-color: #333;
 $background-color: #fff;
-$button-color: #d2691e;
+$button-color: #C6AD94;
 
-header {
-    background: $primary-color;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    width: 100vw;
-    box-sizing: border-box;
+main{
+  padding: 0px;
+  background-color: $button-color;
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.kozepre {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cta-button {
+  background: $primary-color;
+  color: white;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: none;
+  
+  
+  &:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    
+  }
+}
+
+
+
+h1{
+  font-size: 50px;
+  letter-spacing: 3px;
+}
+
+
+p {
+    color: #666;
+    font-size: 20px;
+    margin-bottom: 40px;
 }
 
 .hero-section {
-    height: 100vh;
+    height: 100%;
+    width:100% ;
     background-image: url('/hero.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     padding: 100px 0px;
     display: flex;
-    text-align: center;
-    justify-content: center;
     align-items: center;
   }
 
   .hero-content {
-    max-width: 600px;
+    width: 100%;
   }
   .hero-section h1 {
     font-size: 4rem;
@@ -40,49 +89,81 @@ header {
     color: #F5EBE0;
   }
 
-.books {
+  .books {
     text-align: center;
     padding: 40px;
-    width: 100vw;
-    box-sizing: border-box;
-
-    .book-list {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
+    background-color: $button-color;
+  
+    h2 {
+      margin-bottom: 24px;
+      font-size: 28px;
+      color: #3e2723;
     }
+  
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
 
-    .book {
-        background: white;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 200px;
-
-        img {
-            width: 100%;
-            border-radius: 5px;
+      gap: 24px;
+      padding: 32px;
+      justify-items: center;
+    
+      .example-card {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    
+        img[mat-card-image] {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+    
+        mat-card-title {
+          font-size: 20px;
+          font-weight: bold;
+        }
+    
+        mat-card-subtitle {
+          font-size: 14px;
+          color: #666;
+        }
+    
+        mat-card-content {
+          font-size: 13px;
+          color: #555;
         }
 
-        .btn {
-            display: block;
-            margin-top: 10px;
-            padding: 8px;
-            background: $button-color;
+        mat-card-content p{
+          font-size: 18px;
+          color: #555;
+        }
+    
+        mat-card-header,
+        mat-card-content,
+        mat-card-actions {
+          text-align: left; 
+        }
+
+        mat-card-actions button{
+            background: $primary-color;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 14px 28px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border: none;
+            
+            &:hover {
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            }
         }
+      }
     }
-}
+  }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background: $primary-color;
-    color: white;
-    width: 100vw;
-    box-sizing: border-box;
-
-}
-
+  

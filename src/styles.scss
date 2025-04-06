@@ -1,17 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+$primary-color: #8b4513;
+$secondary-color: #CBBEB3;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #C6AD94;
 
-$primary-color: #8C6954;
-$secondary-color: #D99982;
-$text-color: #F2C6AC;
-$background-color: #401B13;
-$button-color: #0D0D0D;
-
-body {
-    font-family: Arial, sans-serif;
+*{
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: $background-color;
-    color: $text-color;
-    width: 100vw;
-    overflow-x: hidden;
+}
+
+main{
+    background-color: $button-color;
+    height: 100%;
+    padding: 20px;
+}
+
+html, body, app-root {
+    height: 100%;
+    background-color: $button-color;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $button-color;}
+
+button{
+    cursor: pointer;
 }

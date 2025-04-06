@@ -1,26 +1,36 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { MenuComponent } from './shared/menu/menu.component';
-import { NgIf } from '@angular/common';
-import { RegistrateComponent } from './pages/registrate/registrate.component';
-import { KonyvlistaComponent } from './pages/konyvlista/konyvlista.component';
-import { KonyvreszletekComponent } from './pages/konyvreszletek/konyvreszletek.component';
-import { LoginComponent } from './pages/login/login.component';
-import { KosarComponent } from './pages/kosar/kosar.component';
-import { TBRComponent } from "./pages/tasks/tbr.component";
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, ProfileComponent, MenuComponent, NgIf, RegistrateComponent, KonyvlistaComponent, KonyvreszletekComponent, LoginComponent, KosarComponent, TBRComponent],
+  imports: [
+    RouterOutlet,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MenuComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'konyv-webshop';
-  page = 'home';
-  changePage(selectedPage: string){
+  title = 'learnflow';
+
+  /*
+  changePage(selectedPage: string) {
     this.page = selectedPage;
+  }*/
+
+  onToggleSidenav(sidenav: MatSidenav){
+    sidenav.toggle();
   }
 }

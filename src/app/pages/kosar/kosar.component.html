@@ -1,1 +1,31 @@
-<p>kosar works!</p>
+<main>
+  <div class="cart-container" *ngIf="cartBooks.length > 0; else uresKosar">
+    <h2>Kosarad tartalma</h2>
+
+    <div *ngFor="let book of cartBooks" class="book-card">
+      <mat-card>
+        <div class="card-content">
+          <img [src]="book.image" alt="{{ book.title }}" />
+          <div class="info">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+            <p class="price">{{ book.price | currency:'HUF ' }}</p>
+          </div>
+        </div>
+      </mat-card>
+      <mat-divider></mat-divider>
+    </div>
+
+    <div class="summary">
+      <h3>Végösszeg: <span>{{ totalPrice | currency:'HUF ' }}</span></h3>
+      <button mat-flat-button color="primary" (click)="fizetes()">Fizetés</button>
+    </div>
+  </div>
+
+  <ng-template #uresKosar>
+    <div class="ures">
+      <h2>A kosarad üres 😕</h2>
+      <p>Nézz körül a könyvek között, és tegyél hozzá valamit!</p>
+    </div>
+  </ng-template>
+</main>

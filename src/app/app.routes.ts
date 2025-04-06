@@ -26,14 +26,8 @@ export const routes: Routes = [
     { path: 'login', title: 'Bejelentkezés', component: LoginComponent },
 
     { path: 'kosar', title: 'Kosár', component: KosarComponent },
-
-    { path: '**', title: 'Page-Not-Found', component: PageNotFoundComponent }, //ha egyik útvonal sem egyezik
-
-    // Paraméterezett útvonalak
-    // { path: 'task-edit/:id', component: TaskEditComponent },
-
-    // Üres elérési út - alapértelmezett útvonal
+    
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-    
+    { path: '**', title: 'Page-Not-Found', component: PageNotFoundComponent }, //ha egyik útvonal sem egyezik
 ];

@@ -1,37 +1,28 @@
-<!--<router-outlet />-->
-
-<!---<app-menu (selectedPage)="changePage($event)"></app-menu>
-@switch (page) {
-  @case ('home') {
-    <div class="home">
-      <app-home></app-home>
-    </div>
-  }
-  @case ('profile'){
-    <app-profile></app-profile>
-  }
-  @case ('registrate'){
-    <app-registrate></app-registrate>
-  }
-  @case ('konyvlista'){
-    <app-konyvlista></app-konyvlista>
-  }
-  @case ('konyvreszletek'){
-    <app-konyvreszletek></app-konyvreszletek>
-  }
-  @case ('login'){
-    <app-login></app-login>
-  }
-  @case ('kosar') {
-    <app-kosar></app-kosar>
-  }
-  @case ('tbr') {
-    <app-tbr></app-tbr>
-  }
-  @default {
-    <h1>Page not found ...</h1>
-  }
-  }-->
-
-<app-menu></app-menu>
-<router-outlet />
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <app-menu [sidenav]="sidenav"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button 
+        mat-button 
+        (click)="onToggleSidenav(sidenav)"
+        class="menu-toggle-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div style="color: white; font-size: 22px; cursor: pointer;" routerLink="/home">Könyvesbolt</div>
+      <nav>
+        <ul>
+          <li><a routerLink="/home">Főoldal</a></li>
+          <li><a routerLink="/konyvlista">Könyveink</a></li>
+          <li><a routerLink="/tbr">TBR</a></li>
+          <li><a routerLink="/profile">Profil</a></li>
+          <li><a routerLink="/login">Bejelentkezés</a></li>
+          <li><a routerLink="/registrate">Regisztráció</a></li>
+          <li><a routerLink="/kosar">Kosár</a></li>
+        </ul>
+      </nav>
+    </mat-toolbar>
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>

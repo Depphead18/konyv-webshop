@@ -1,0 +1,75 @@
+$primary-color: #8b4513;
+$secondary-color: #CBBEB3;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #C6AD94;
+
+.cart-container {
+  width: 35%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fffbe6;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.book-card {
+  margin-bottom: 20px;
+
+  mat-card {
+    padding: 10px;
+
+    .card-content {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 100px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 4px;
+      }
+
+      .info {
+        h3 {
+          margin: 0;
+        }
+
+        .price {
+          color: #8b4513;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.summary {
+  margin-top: 30px;
+  text-align: right;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    font-weight: bold;
+    background-color: $primary-color;
+    color: white;
+  }
+}
+
+.ures {
+  text-align: center;
+  margin-top: 100px;
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #555;
+  }
+}
