@@ -11,6 +11,25 @@ $button-color: #C6AD94;
   background-color: #fffbe6;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  @media (min-width: 600px) {
+    width: 80%;
+  }
+
+  @media (min-width: 960px) {
+    width: 60%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 35%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: $primary-color;
+  }
 }
 
 .book-card {
@@ -23,14 +42,28 @@ $button-color: #C6AD94;
       display: flex;
       align-items: center;
 
+      @media (min-width: 600px) {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
       img {
         width: 100px;
         height: auto;
         margin-right: 20px;
         border-radius: 4px;
+
+        @media (min-width: 600px) {
+          width: 100px;
+        }
       }
 
       .info {
+
+        @media (min-width: 600px) {
+          text-align: left;
+        }
+
         h3 {
           margin: 0;
         }
@@ -46,7 +79,10 @@ $button-color: #C6AD94;
 
 .summary {
   margin-top: 30px;
-  text-align: right;
+
+  @media (min-width: 600px) {
+    text-align: right;
+  }
 
   h3 {
     font-size: 20px;

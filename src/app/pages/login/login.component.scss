@@ -16,6 +16,14 @@ $button-color: #C6AD94;
       margin-bottom: 20px;
       color: $primary-color;
       font-size: 50px;
+
+      @media (min-width: 600px) {
+        font-size: 2.5rem;
+      }
+  
+      @media (min-width: 960px) {
+        font-size: 3rem;
+      }
     }
   }
   

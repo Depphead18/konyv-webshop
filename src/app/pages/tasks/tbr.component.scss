@@ -20,6 +20,8 @@ $button-color: #C6AD94;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
+    
   }
   
   h2 {
@@ -109,3 +111,23 @@ $button-color: #C6AD94;
     text-decoration: line-through;
     color: white;
   }
+
+  @media (max-width: 576px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  
+    .input-group {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .input-group input[type="text"],
+    .input-group select,
+    .input-group button {
+      width: 100%;
+    }
+  }
+  

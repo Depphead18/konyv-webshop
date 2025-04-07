@@ -5,33 +5,59 @@ $background-color: #fff;
 $button-color: #C6AD94;
 
 
-
-h1{
-  font-size: 50px;
-  letter-spacing: 3px;
-  text-align: center;
-  color: #3e2723;
-}
-
 .books {
     padding: 40px;
     background-color: $button-color;
     
+    h1{
+      font-size: 50px;
+      letter-spacing: 3px;
+      text-align: center;
+      color: #3e2723;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
   
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-
       gap: 24px;
       padding: 32px;
       justify-items: center;
+
+      @media (min-width: 600px) {
+        grid-template-columns: repeat(2, 1fr); 
+        
+      }
+  
+      @media (min-width: 960px) {
+        grid-template-columns: repeat(3, 1fr); // nagyobb tableten 3
+      }
+  
+      @media (min-width: 1200px) {
+        grid-template-columns: repeat(5, 1fr); // desktopon 5
+      }
     
       .example-card {
         width: 100%;
-        max-width: 300px;
         border-radius: 12px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease;
+        margin: 0 auto;
+        max-width: 280px;
+
+        @media (min-width: 500px) {
+          max-width: 200px;
+        }
+
+        @media (min-width: 900px) {
+          max-width: 260px;
+        }
+
+        @media (min-width: 1200px) {
+          max-width: 300px;
+        }
     
         img[mat-card-image] {
           width: auto;

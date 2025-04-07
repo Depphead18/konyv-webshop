@@ -73,21 +73,36 @@ p {
     padding: 100px 0px;
     display: flex;
     align-items: center;
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #F5EBE0;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 20px;
+      color: #F5EBE0;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      p {
+        font-size: 1.25rem;
+      }
+    }
   }
 
   .hero-content {
     width: 100%;
   }
-  .hero-section h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    color: #F5EBE0;
-  }
-  .hero-section p {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-    color: #F5EBE0;
-  }
+  
+  
+
+
 
   .books {
     text-align: center;
@@ -99,14 +114,29 @@ p {
       font-size: 28px;
       color: #3e2723;
     }
+
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
   
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
 
       gap: 24px;
       padding: 32px;
       justify-items: center;
+
+      @media (min-width: 500px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+  
+      @media (min-width: 900px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+  
+      @media (min-width: 1200px) {
+        grid-template-columns: repeat(5, 1fr);
+      }
     
       .example-card {
         width: 100%;
