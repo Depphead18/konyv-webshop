@@ -59,7 +59,7 @@ export class TBRComponent implements OnInit {
   ngOnInit(): void {
     this.konyvek = this.konyvek.map(konyv => {
       const date = new Date();
-      date.setDate(date.getDate() + 2);
+      date.setDate(date.getDate());
       return {
         ...konyv,
         dueDate: date.toISOString()
