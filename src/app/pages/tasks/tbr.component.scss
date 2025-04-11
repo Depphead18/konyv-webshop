@@ -1,133 +1,304 @@
-$primary-color: #8b4513;
-$secondary-color: #CBBEB3;
-$text-color: #333;
-$background-color: #fff;
-$button-color: #C6AD94;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
 
-
+$primary-color: #5e3a1f;
+$secondary-color: #d7ccc8;
+$accent-color: #8d6e63;
+$text-color: #4e342e;
+$light-text: #efebe9;
+$background-color: #fff9f6;
+$button-color: #a1887f;
+$completed-color: #81c784;
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  .header {
+    background-color: $background-color;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
     
-  }
-  
-  h2 {
-    margin: 0;
-    color: #333;
-    font-family: serif;
-    font-weight: normal;
-  }
-  
-  .input-group {
+    .title-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        
+        h2 {
+            margin: 0;
+            color: $primary-color;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .book-icon {
+            font-size: 28px;
+            color: $accent-color;
+        }
+    }
+}
+
+.input-group {
     display: flex;
     gap: 10px;
-  }
-  
-  input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    flex-grow: 1;
-    min-width: 200px;
-  }
-  
-  select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #5a4af7;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  table {
+    flex-wrap: wrap;
+    
+    input[type="text"] {
+        padding: 12px 15px;
+        border: 2px solid $secondary-color;
+        border-radius: 8px;
+        flex-grow: 1;
+        min-width: 250px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        
+        &:focus {
+            border-color: $accent-color;
+            outline: none;
+        }
+    }
+    
+    select {
+        padding: 12px 15px;
+        border: 2px solid $secondary-color;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: white;
+        cursor: pointer;
+    }
+    
+    button {
+        background-color: $accent-color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        &:hover {
+            background-color: darken($accent-color, 10%);
+        }
+        
+        &:disabled {
+            background-color: lighten($accent-color, 20%);
+            cursor: not-allowed;
+        }
+        
+        .plus-icon {
+            font-size: 18px;
+        }
+    }
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    padding: 20px;
+    border-radius: 10px;
+    
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: $primary-color;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: $text-color;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  th {
-    text-align: left;
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    color: #555;
-    font-weight: normal;
-  }
-  
-  td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    color: #767676;
-  }
-  
-  .priority {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    color: white;
-  }
-  
-  .magas {
-    background-color: #f44336;
-  }
-  
-  .közepes {
-    background-color: #ff9800;
-  }
-  
-  .alacsony {
-    background-color: #4caf50;
-  }
-  
-  .edit-link {
-    color: #5a4af7;
-    text-decoration: none;
-  }
-  
-  .edit-link:hover {
-    text-decoration: underline;
-  }
-  
-  .completed {
-    text-decoration: line-through;
-    color: white;
-  }
+    
+    th {
+        text-align: left;
+        padding: 15px;
+        border-bottom: 2px solid $secondary-color;
+        color: $primary-color;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    
+    td {
+        padding: 15px;
+        border-bottom: 1px solid lighten($secondary-color, 5%);
+        color: $text-color;
+        transition: background-color 0.2s;
+    }
+    
+    .completed-row {
+        background-color: rgba($completed-color, 0.1);
+        
+        td {
+            color: lighten($text-color, 30%);
+        }
+    }
+    
+    .empty-message {
+        text-align: center;
+        padding: 30px;
+        color: lighten($text-color, 20%);
+        font-style: italic;
+    }
+}
 
-  @media (max-width: 576px) {
+.checkbox-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background-color: white;
+        border: 2px solid $secondary-color;
+        border-radius: 4px;
+        transition: all 0.3s;
+        
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 8px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+    
+    input:checked ~ .checkmark {
+        background-color: $completed-color;
+        border-color: $completed-color;
+        
+        &:after {
+            display: block;
+        }
+    }
+}
+
+.priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    
+    .priority-icon {
+        font-size: 16px;
+    }
+    
+    &.magas {
+        background-color: #e53935;
+    }
+    
+    &.közepes {
+        background-color: #fb8c00;
+    }
+    
+    &.alacsony {
+        background-color: #43a047;
+    }
+}
+
+.completed {
+    text-decoration: line-through;
+    color: lighten($text-color, 40%);
+}
+
+.new-badge {
+    background-color: #ffeb3b;
+    color: $text-color;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #e53935;
+    transition: transform 0.2s;
+    
+    &:hover {
+        transform: scale(1.1);
+    }
+    
+    .trash-icon {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
     .header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
+        flex-direction: column;
+        align-items: stretch;
     }
-  
+    
     .input-group {
-      flex-direction: column;
-      width: 100%;
+        flex-direction: column;
+        
+        input, select, button {
+            width: 100%;
+        }
     }
-  
-    .input-group input[type="text"],
-    .input-group select,
-    .input-group button {
-      width: 100%;
+    
+    .stats {
+        flex-direction: column;
+        gap: 20px;
     }
-  }
-  
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}

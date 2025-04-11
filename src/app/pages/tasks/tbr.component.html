@@ -1,35 +1,84 @@
 <main>
     <div class="container" style="margin-top: 50px;">
         <div class="header">
-            <h2>{{ title }}</h2>
+            <div class="title-container">
+                <h2>{{ title }}</h2>
+                <div class="book-icon">📚</div>
+            </div>
             <div class="input-group">
-                <input type="text" placeholder="Új könyv hozzáadása" [(ngModel)]="newBookName">
+                <input type="text" placeholder="Új könyv hozzáadása..." [(ngModel)]="newBookName" 
+                       (keyup.enter)="addBook()">
                 <select [(ngModel)]="newBookPriority">
-                    <option value="Magas">Magas</option>
-                    <option value="Közepes">Közepes</option>
-                    <option value="Alacsony">Alacsony</option>
+                    <option *ngFor="let priority of priorities" [value]="priority">
+                        {{ priority }}
+                    </option>
                 </select>
-                <button (click)="addBook()">Hozzáadás</button>
+                <button (click)="addBook()" [disabled]="!newBookName.trim()">
+                    <span class="plus-icon">+</span> Hozzáadás
+                </button>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">{{ getTotalBooks() }}</span>
+                <span class="stat-label">Összes könyv</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ getCompletedBooks() }}</span>
+                <span class="stat-label">Elolvasott</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ getPendingBooks() }}</span>
+                <span class="stat-label">Hátralévő</span>
             </div>
         </div>
             
         <table>
             <thead>
                 <tr>
-                    <th>Státusz</th>
+                    <th width="60px">Státusz</th>
                     <th>Cím</th>
-                    <th>Prioritás</th>
-                    <th>Felvétel dátuma</th>
-                    <th></th>
+                    <th width="120px">Prioritás</th>
+                    <th width="150px">Felvétel dátuma</th>
+                    <th width="80px"></th>
                 </tr>
             </thead>
             <tbody>
-                    <tr *ngFor="let konyv of konyvek; trackBy: trackById">
-                    <td><input type="checkbox" [checked]="konyv.completed" (change)="toggleBookCompletion(konyv)"></td>
-                    <td [class.completed]="konyv.completed" [appCustomColor]="konyv.completed" appHighlightOnHover>{{ konyv.title }}</td>
-                    <td><span class="priority {{ konyv.priority.toLowerCase() }}">{{ konyv.priority }}</span></td>
+                <tr *ngFor="let konyv of konyvek; trackBy: trackById" 
+                    [class.completed-row]="konyv.completed">
+                    <td>
+                        <label class="checkbox-container">
+                            <input type="checkbox" [checked]="konyv.completed" 
+                                   (change)="toggleBookCompletion(konyv)">
+                            <span class="checkmark"></span>
+                        </label>
+                    </td>
+                    <td [class.completed]="konyv.completed" 
+                        [appCustomColor]="konyv.completed" 
+                        appHighlightOnHover>
+                        {{ konyv.title }}
+                        <span *ngIf="isNew(konyv)" class="new-badge">Új</span>
+                    </td>
+                    <td>
+                        <span class="priority {{ konyv.priority.toLowerCase() }}">
+                            {{ konyv.priority }}
+                            <span class="priority-icon">
+                                {{ getPriorityIcon(konyv.priority) }}
+                            </span>
+                        </span>
+                    </td>
                     <td>{{ konyv.dueDate | dateFormatter }}</td>
-                    <td><a href="#" class="edit-link">Törlés</a></td>
+                    <td>
+                        <button class="delete-btn" (click)="deleteBook(konyv.id)">
+                            <span class="trash-icon">🗑️</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="konyvek.length === 0">
+                    <td colspan="5" class="empty-message">
+                        Nincsenek könyvek a listában. Adj hozzá újat!
+                    </td>
                 </tr>
             </tbody>
         </table>
