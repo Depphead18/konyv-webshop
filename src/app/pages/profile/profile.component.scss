@@ -1,133 +1,155 @@
-$primary-color: #8b4513;
-$secondary-color: #CBBEB3;
-$text-color: #333;
-$background-color: #fff;
+$primary-color: #8C6954;
+$secondary-color: #d7ccc8;
+$accent-color: #5d4037;
+$text-color: #3e2723;
+$background-color: #efebe9;
 $button-color: #C6AD94;
 
+.profile-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
 .profile-card {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #fffaf3;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: $background-color;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-    @media (min-width: 768px) {
-      padding: 30px;
-    }
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   }
-  
-  .profile-container {
-    max-width: 800px;
-    margin: 20px auto;
-  }
-  
-  mat-card {
-    margin-bottom: 20px;
-    color: $primary-color;
-    align-items: center;
-  }
-  
-  mat-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
+}
 
-  mat-card-title{
-    font-size: 30px;
-    color: $primary-color;
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    @media (min-width: 600px) {
-      font-size: 28px;
-    }
-  
-    @media (min-width: 960px) {
-      font-size: 32px;
-    }
-  }
-  
-  .profile-info {
-    display: flex;
-    align-items: center;
-    margin: 20px 0 40px 0;
-    flex-direction: column;
+mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: $primary-color;
+  margin: 0;
+}
 
-    @media (min-width: 600px) {
-      flex-direction: row;
-      justify-content: center;
-      gap: 24px;
-    }
-  }
-  
-  .avatar-container {
-    margin-right: 24px;
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
 
-    @media (min-width: 600px) {
-      margin-bottom: 0;
-    }
+  @media (min-width: 600px) {
+    flex-direction: row;
+    align-items: flex-start;
   }
-  
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #e8eaf6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: #3f51b5;
-  }
+}
 
-  .user-details {
-    display: flex;
-    flex-direction: column;
+.avatar-container {
+  position: relative;
+  margin-bottom: 20px;
+  
+  @media (min-width: 600px) {
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+}
 
-    @media (min-width: 600px) {
-      align-items: flex-start;
-    }
-  }
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: $primary-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  font-weight: 600;
+  position: relative;
+}
+
+.user-details {
+  text-align: center;
   
-  .user-name {
-    margin: 0 0 8px 0;
-    font-size: 24px;
-    font-weight: 500;
+  @media (min-width: 600px) {
+    text-align: left;
   }
+}
+
+.user-name {
+  margin: 0 0 5px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+.user-meta {
+  margin-bottom: 15px;
   
-  .user-email {
-    display: flex;
-    align-items: center;
+  .username {
     color: $button-color;
-    font-size: 16px;
-    
-    mat-icon {
-      font-size: 18px;
-      height: 18px;
-      width: 18px;
-      margin-right: 8px;
-    }
+    font-weight: 500;
+    margin-right: 10px;
   }
+}
 
-  .logout-button {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    padding: 10px 24px;
-    border: rgb(106, 0, 0);
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+.user-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  
+  div {
     display: flex;
     align-items: center;
-  
-    mat-icon {
-      margin-right: 8px;
-    }
-  
-    &:hover {
-      background-color: darken(red, 10%);
-    }
   }
   
+  mat-icon {
+    margin-right: 8px;
+    color: $primary-color;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  span {
+    color: $primary-color;
+    font-size: 15px;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding-top: 10px;
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.edit-button {
+  border-color: $primary-color;
+  color: $primary-color;
+  
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+  }
+}
+
+.logout-button {
+  background-color: $primary-color;
+  color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}

@@ -1,32 +1,49 @@
 <main>
-    <div class="profil">
-        <mat-card class="profile-card">
-          <mat-card-header>
-            <mat-card-title>Profil oldal</mat-card-title>
+  <div class="profile-container">
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <div class="header-content">
+          <mat-card-title>Személyes profil</mat-card-title>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="profile-info">
+          <div class="avatar-container">
+            <div class="avatar mat-elevation-z4">
+              {{getInitials(profileObject[selectedIndex].user_name)}}
+            </div>
+          </div>
+          <div class="user-details">
+            <h3 class="user-name">{{profileObject[selectedIndex].user_name}}</h3>
+            <div class="user-meta">
+              <span class="username">{{profileObject[selectedIndex].username}}</span>
+            </div>
             
-          </mat-card-header>
-      
-          <mat-card-content>
-            <div class="profile-info">
-              <div class="avatar-container">
-                <div class="avatar mat-elevation-z2">
-                  {{profileObject[selectedIndex].avatar}}
-                </div>
+            <div class="user-contact">
+              <div class="user-email">
+                <mat-icon>email</mat-icon>
+                <span>{{profileObject[selectedIndex].email}}</span>
               </div>
-              <div class="user-details">
-                <h3 class="user-name">{{profileObject[selectedIndex].user_name}}</h3>
-                <div class="user-email">
-                  <mat-icon>email</mat-icon>
-                  <span>{{profileObject[selectedIndex].email}}</span>
-                </div>
+              <div class="user-phone">
+                <mat-icon>phone</mat-icon>
+                <span>{{profileObject[selectedIndex].phone || 'Nincs megadva'}}</span>
               </div>
             </div>
+          </div>
+        </div>
 
-            <button mat-raised-button class="logout-button" (click)="logout()">
-              <mat-icon>logout</mat-icon>
-              Kijelentkezés
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </div>
+        <div class="action-buttons">
+          <button mat-stroked-button class="edit-button">
+            <mat-icon>edit</mat-icon>
+            Profil szerkesztése
+          </button>
+          <button mat-raised-button class="logout-button" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Kijelentkezés
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </main>

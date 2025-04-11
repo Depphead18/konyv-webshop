@@ -1,46 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileObject } from '../../shared/constants';
+import { User } from '../../shared/users/User';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,
+  standalone: true,
+  imports: [
+    CommonModule,
     MatCardModule,
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatProgressBarModule],
+    MatButtonModule
+  ],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit{
-  profileObject: any = ProfileObject;
+export class ProfileComponent implements OnInit {
+  profileObject: any = [
+    {
+      user_name: 'Kovács János',
+      username: 'kovacsjani',
+      email: 'kovacs.janos@example.com',
+      phone: '+36 70 123 4567',
+      avatar: 'KJ'
+    }
+  ];
   
   selectedIndex: number = 0;
 
-  ngOnInit(): void{
-    this.selectedIndex;
+  ngOnInit(): void {
+    // Inicializálás
   }
 
-  reload (index: number): void{
+  getInitials(name: string): string {
+    return name.split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase();
+  }
+
+  reload(index: number): void {
     this.selectedIndex = index;
   }
 
   logout() {
-    //this.authService.signOut();
-    
+    // Kijelentkezési 
   }
-
-  user = {
-    name: 'Vezeteknev Keresztnev',
-    felhasznalonev: '@valami',
-    email: 'felhasznalo@example.com',
-    avatar: 'https://i.pravatar.cc/150?img=3'
-  };
 }
