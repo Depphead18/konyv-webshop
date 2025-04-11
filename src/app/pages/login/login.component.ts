@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,20 +29,18 @@ export class LoginComponent {
   loginError: string = '';
   showLoginForm: boolean = true;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   login() {
     this.loginError = '';
-    
-    if (this.email.value === 'test@gmail.com' && this.password.value === 'testpw') {
+  
+    if (this.email.value === 'test@gmail.com' && this.password.value === 'asd') {
       this.isLoading = true;
       this.showLoginForm = false;
-      
+  
       localStorage.setItem('isLoggedIn', 'true');
-      
-      setTimeout(() => {
-        window.location.href = '/home';
-      }, 3000);
+
+      this.router.navigate(['/home']);
     } else {
       this.loginError = 'Hibás e-mail vagy jelszó!';
     }

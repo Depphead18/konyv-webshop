@@ -10,7 +10,6 @@ import { KosarComponent } from './pages/kosar/kosar.component';
 import { TBRComponent } from "./pages/tasks/tbr.component";
 
 export const routes: Routes = [
-    // Statikus elérési útvonalak
     { path: 'home', title: 'Főoldal', component: HomeComponent },
 
     { path: 'tbr', title: 'TBR Lista', component: TBRComponent },
@@ -29,5 +28,5 @@ export const routes: Routes = [
     
     { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-    { path: '**', title: 'Page-Not-Found', component: PageNotFoundComponent }, //ha egyik útvonal sem egyezik
+    { path: '**', title: 'Page-Not-Found', component: PageNotFoundComponent },
 ];

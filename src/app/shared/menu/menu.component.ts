@@ -20,17 +20,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   @Input() sidenav!: MatSidenav;
 
-  constructor() {
-    console.log("constructor called");
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-    console.log("ngOnInit called");
-  }
+  ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-    console.log("ngAfterViewInit called");
-  }
+  ngAfterViewInit(): void {}
 
   closeMenu() {
     if (this.sidenav) {

@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit{
 
   logout() {
     //this.authService.signOut();
-    console.log('Kijelentkezés...');
+    
   }
 
   user = {

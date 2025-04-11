@@ -5,16 +5,16 @@ import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from '@angular
 })
 
 export class CustomTextColor implements OnChanges {
-    @Input() appCustomColor: boolean = false;  // Az input az állapotot fogja kezelni
+    @Input() appCustomColor: boolean = false;
   
     constructor(private elementRef: ElementRef) {}
   
     ngOnChanges(changes: SimpleChanges): void {
       if (changes['appCustomColor']) {
         if (this.appCustomColor) {
-          this.elementRef.nativeElement.style.color = 'green';  // Ha completed, zöld lesz
+          this.elementRef.nativeElement.style.color = 'green';
         } else {
-          this.elementRef.nativeElement.style.color = '';  // Ha nem completed, visszaáll a normál szín
+          this.elementRef.nativeElement.style.color = '';
         }
       }
     }

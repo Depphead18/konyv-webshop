@@ -65,9 +65,6 @@ export class RegistrateComponent {
       password: this.signUpForm.value.password || '',
     };
 
-    console.log('New user:', newUser);
-    console.log('Form value:', this.signUpForm.value);
-
     setTimeout(() => {
       this.router.navigateByUrl('/home');
     }, 2000);

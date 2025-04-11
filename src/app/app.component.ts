@@ -23,12 +23,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'learnflow';
-
-  /*
-  changePage(selectedPage: string) {
-    this.page = selectedPage;
-  }*/
+  title = 'konyesbolt';
 
   onToggleSidenav(sidenav: MatSidenav){
     sidenav.toggle();
