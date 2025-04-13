@@ -95,6 +95,22 @@ $button-color: #C6AD94;
         mat-card-actions {
           text-align: left; 
         }
+
+        mat-card-actions button{
+          background: $primary-color;
+          color: white;
+          padding: 14px 28px;
+          font-size: 12px;
+          font-weight: bold;
+          border-radius: 12px;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s ease;
+          border: none;
+          
+          &:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+          }
+      }
       }    
     }
   }
