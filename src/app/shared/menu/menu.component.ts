@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
@@ -28,7 +28,10 @@ export class MenuComponent {
   constructor(
     private authService: AuthService
   ) {
-    this.isLoggedIn$ = this.authService.isLoggedIn();
+    this.isLoggedIn$ = this.authService.isLoggedIn().pipe(
+      map(user => !!user) // true, ha van bejelentkezett user
+);
+
   }
 
   closeMenu(sidenav: MatSidenav) {

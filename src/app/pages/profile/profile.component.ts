@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../../shared/users/User';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../shared/services/user.service';
+import { User } from '../../shared/users/User';
+import { TBR } from '../../shared/models/TBR';
 
 @Component({
   selector: 'app-profile',
@@ -17,47 +15,51 @@ import { Router } from '@angular/router';
     CommonModule,
     MatCardModule,
     MatIconModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatButtonModule
+    MatProgressBarModule
   ],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrl: './profile.component.scss'
 })
-export class ProfileComponent implements OnInit {
-  profileObject: any = [
-    {
-      user_name: 'Kovács János',
-      username: 'kovacsjani',
-      email: 'kovacs.janos@example.com',
-      phone: '+36 70 123 4567',
-      avatar: 'KJ'
-    }
-  ];
-
-  constructor(private authService: AuthService, private router: Router) {}
-
+export class ProfileComponent implements OnInit, OnDestroy {
+  user: User | null = null;
+  tbrs: TBR[] = [];
+  isLoading = true;
   
-  selectedIndex: number = 0;
+  private subscription: Subscription | null = null;
+
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    // Inicializálás
+    this.loadUserProfile();
   }
 
-  getInitials(name: string): string {
-    return name.split(' ')
-      .map(part => part[0])
-      .join('')
-      .toUpperCase();
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
-  reload(index: number): void {
-    this.selectedIndex = index;
+  loadUserProfile(): void {
+    this.isLoading = true;
+    this.subscription = this.userService.getUserProfile().subscribe({
+      next: (data) => {
+        this.user = data.user;
+        this.tbrs = data.tbr;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Hiba a felhasználói profil betöltésekor:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
-  logout(): void {
-  this.authService.signOut().then(() => {
-    this.router.navigateByUrl('/home');
-  });
-}
+  getInitials(): string {
+    if (!this.user || !this.user.name) return '?';
+    
+    const firstInitial = this.user.name.firstname ? this.user.name.firstname.charAt(0).toUpperCase() : '';
+    const lastInitial = this.user.name.lastname ? this.user.name.lastname.charAt(0).toUpperCase() : '';
+    
+    return firstInitial + (lastInitial ? lastInitial : '');
+  }
 }

@@ -18,13 +18,13 @@
           <li><a routerLink="/tbr">TBR</a></li>
 
           <!-- Csak bejelentkezve -->
-          <ng-container *ngIf="isLoggedIn$ | async">
+          <ng-container *ngIf="isLoggedIn">
             <li><a routerLink="/profile">Profil</a></li>
             <li><a routerLink="/kosar">Kosár</a></li>
           </ng-container>
 
           <!-- Csak NEM bejelentkezve -->
-          <ng-container *ngIf="(isLoggedIn$ | async) === false">
+          <ng-container *ngIf="(isLoggedIn) === false">
             <li><a routerLink="/login">Bejelentkezés</a></li>
             <li><a routerLink="/registrate">Regisztráció</a></li>
           </ng-container>

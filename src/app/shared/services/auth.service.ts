@@ -4,11 +4,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
   authState,
-  User,
-  UserCredential
+  User as FirebaseUser,
+  UserCredential,
+  createUserWithEmailAndPassword
 } from '@angular/fire/auth';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
+import { User } from '../users/User';
+
+// ✅ Típus új felhasználó létrehozásához (Firestore-ba)
+type NewUserData = Omit<User, 'id'>;
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +22,12 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  currentUser: Observable<User | null>;
+  currentUser: Observable<FirebaseUser | null>;
 
   constructor(
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private firestore: Firestore
   ) {
     this.currentUser = authState(this.auth);
     this.currentUser.subscribe(user => {
@@ -39,7 +46,29 @@ export class AuthService {
     });
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.isLoggedIn$;
+  async signUp(email: string, password: string, userData: NewUserData): Promise<UserCredential> {
+    const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+
+    // 👇 Új felhasználó adatainak mentése Firestore-ba
+    await this.createUserData(userCredential.user.uid, {
+      ...userData,
+      email,
+      tbr: []
+    });
+
+    return userCredential;
+  }
+
+  private async createUserData(userId: string, userData: NewUserData): Promise<void> {
+    const userRef = doc(this.firestore, 'Users', userId);
+    return setDoc(userRef, userData);
+  }
+
+  isLoggedIn(): Observable<FirebaseUser | null> {
+    return this.currentUser;
+  }
+
+  updateLoginStatus(isLoggedIn: boolean): void {
+    localStorage.setItem('isLoggedIn', isLoggedIn ? 'true' : 'false');
   }
 }
