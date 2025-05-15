@@ -1,32 +1,56 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component'
-import { RegistrateComponent } from './pages/registrate/registrate.component';
-import { KonyvlistaComponent } from './pages/konyvlista/konyvlista.component';
-import { KonyvreszletekComponent } from './pages/konyvreszletek/konyvreszletek.component';
-import { LoginComponent } from './pages/login/login.component';
-import { KosarComponent } from './pages/kosar/kosar.component';
-import { TBRComponent } from "./pages/tasks/tbr.component";
+import { authGuard, publicGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
-    { path: 'home', title: 'Főoldal', component: HomeComponent },
-
-    { path: 'tbr', title: 'TBR Lista', component: TBRComponent },
-
-    { path: 'profile', title: 'Profil', component: ProfileComponent, },
-
-    { path: 'registrate', title: 'Regisztráció', component: RegistrateComponent },
-
-    { path: 'konyvlista', title: 'Könyveink', component: KonyvlistaComponent },
-
-    { path: 'konyvreszletek', title: 'Részletek', component: KonyvreszletekComponent },
-
-    { path: 'login', title: 'Bejelentkezés', component: LoginComponent },
-
-    { path: 'kosar', title: 'Kosár', component: KosarComponent },
-    
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-    { path: '**', title: 'Page-Not-Found', component: PageNotFoundComponent },
+    {
+        path: 'home',
+        title: 'Főoldal',
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+    },
+    {
+        path: 'tbr',
+        title: 'TBR Lista',
+        loadComponent: () => import('./pages/tasks/tbr.component').then(m => m.TBRComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'profile',
+        title: 'Profil',
+        loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'registrate',
+        title: 'Regisztráció',
+        loadComponent: () => import('./pages/registrate/registrate.component').then(m => m.RegistrateComponent),
+    },
+    {
+        path: 'konyvlista',
+        title: 'Könyveink',
+        loadComponent: () => import('./pages/konyvlista/konyvlista.component').then(m => m.KonyvlistaComponent),
+    },
+    {
+        path: 'konyvreszletek',
+        title: 'Részletek',
+        loadComponent: () => import('./pages/konyvreszletek/konyvreszletek.component').then(m => m.KonyvreszletekComponent),
+    },
+    {
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+    },
+    {
+        path: 'kosar',
+        title: 'Kosár',
+        loadComponent: () => import('./pages/kosar/kosar.component').then(m => m.KosarComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        loadComponent: () => import('./shared/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent)
+    },
 ];
