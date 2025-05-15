@@ -16,12 +16,21 @@
           <li><a routerLink="/home">Főoldal</a></li>
           <li><a routerLink="/konyvlista">Könyveink</a></li>
           <li><a routerLink="/tbr">TBR</a></li>
-          <li><a routerLink="/profile">Profil</a></li>
-          <li><a routerLink="/login">Bejelentkezés</a></li>
-          <li><a routerLink="/registrate">Regisztráció</a></li>
-          <li><a routerLink="/kosar">Kosár</a></li>
+
+          <!-- Csak bejelentkezve -->
+          <ng-container *ngIf="isLoggedIn$ | async">
+            <li><a routerLink="/profile">Profil</a></li>
+            <li><a routerLink="/kosar">Kosár</a></li>
+          </ng-container>
+
+          <!-- Csak NEM bejelentkezve -->
+          <ng-container *ngIf="(isLoggedIn$ | async) === false">
+            <li><a routerLink="/login">Bejelentkezés</a></li>
+            <li><a routerLink="/registrate">Regisztráció</a></li>
+          </ng-container>
         </ul>
       </nav>
+
     </mat-toolbar>
     <router-outlet />
   </mat-sidenav-content>

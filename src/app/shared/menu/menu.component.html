@@ -1,32 +1,49 @@
 <main style="padding: 0;">
-    <mat-nav-list>
-        <a mat-list-item routerLink="/home" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>home</mat-icon>
-          <span matListItemTitle>Főoldal</span>
-        </a>
-        <a mat-list-item routerLink="/konyvlista" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>book_2</mat-icon>
-          <span matListItemTitle>Könyveink</span>
-        </a>
-        <a mat-list-item routerLink="/tbr" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>timer</mat-icon>
-          <span matListItemTitle>TBR</span>
-        </a> 
-        <a mat-list-item routerLink="/profile" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>person</mat-icon>
-          <span matListItemTitle>Profil</span>
-        </a>  
-        <a mat-list-item routerLink="/login" routerLinkActive="active-list-item" (click)="closeMenu()">
-            <mat-icon matListItemIcon>login</mat-icon>
-            <span matListItemTitle>Bejelentkezés</span>
-        </a> 
-        <a mat-list-item routerLink="/registrate" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>how_to_reg</mat-icon>
-          <span matListItemTitle>Regisztráció</span>
-        </a> 
-        <a mat-list-item routerLink="/kosar" routerLinkActive="active-list-item" (click)="closeMenu()">
-          <mat-icon matListItemIcon>shopping_cart</mat-icon>
-          <span matListItemTitle>Kosár</span>
-        </a>
-      </mat-nav-list>
+  <mat-nav-list>
+    <a mat-list-item routerLink="/home" routerLinkActive="active-list-item">
+      <mat-icon matListItemIcon>home</mat-icon>
+      <span matListItemTitle>Főoldal</span>
+    </a>
+
+    <a mat-list-item routerLink="/konyvlista" routerLinkActive="active-list-item">
+      <mat-icon matListItemIcon>book_2</mat-icon>
+      <span matListItemTitle>Könyveink</span>
+    </a>
+
+    <a mat-list-item routerLink="/tbr" routerLinkActive="active-list-item">
+      <mat-icon matListItemIcon>timer</mat-icon>
+      <span matListItemTitle>TBR</span>
+    </a>
+
+    <!-- Csak BEJELENTKEZVE -->
+    <ng-container *ngIf="isLoggedIn$ | async">
+      <a mat-list-item routerLink="/profile" routerLinkActive="active-list-item">
+        <mat-icon matListItemIcon>person</mat-icon>
+        <span matListItemTitle>Profil</span>
+      </a>
+
+      <a mat-list-item routerLink="/kosar" routerLinkActive="active-list-item">
+        <mat-icon matListItemIcon>shopping_cart</mat-icon>
+        <span matListItemTitle>Kosár</span>
+      </a>
+
+      <a mat-list-item (click)="logout()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Kijelentkezés</span>
+      </a>
+    </ng-container>
+
+    <!-- Csak NEM bejelentkezve -->
+    <ng-container *ngIf="(isLoggedIn$ | async) === false">
+      <a mat-list-item routerLink="/login" routerLinkActive="active-list-item">
+        <mat-icon matListItemIcon>login</mat-icon>
+        <span matListItemTitle>Bejelentkezés</span>
+      </a>
+
+      <a mat-list-item routerLink="/registrate" routerLinkActive="active-list-item">
+        <mat-icon matListItemIcon>how_to_reg</mat-icon>
+        <span matListItemTitle>Regisztráció</span>
+      </a>
+    </ng-container>
+  </mat-nav-list>
 </main>

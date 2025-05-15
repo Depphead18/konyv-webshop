@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TBR } from '../tbr.component';
+import { TBR } from '../../../shared/models/TBR';
 
 @Component({
   selector: 'app-task-item',

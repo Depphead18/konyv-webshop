@@ -4,15 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DateFormatterPipe } from '../../shared/pipes/date.pipe';
 import { CustomTextColor } from '../../shared/directives/custom-text-color.directive';
 import { HighlightOnHoverDirective } from '../../shared/directives/appHighlightOnHover';
-
-export interface TBR {
-  id: number;
-  title: string;
-  completed: boolean;
-  priority: 'Magas' | 'Közepes' | 'Alacsony';
-  dueDate: string;
-  addedDate: string;
-}
+import { TBRService } from '../../shared/services/tbr-service.service';
+import { TBR } from '../../shared/models/TBR';
 
 @Component({
   selector: 'app-tbr',
@@ -29,67 +22,41 @@ export class TBRComponent implements OnInit {
   priorities: ('Magas' | 'Közepes' | 'Alacsony')[] = ['Magas', 'Közepes', 'Alacsony'];
   newBookPriority: 'Magas' | 'Közepes' | 'Alacsony' = 'Alacsony';
   
-  konyvek: TBR[] = [
-    {
-      id: 1,
-      title: 'Az aratás hajnala',
-      completed: false,
-      priority: 'Magas',
-      dueDate: new Date().toISOString(),
-      addedDate: new Date().toISOString()
-    },
-    {
-      id: 2,
-      title: 'Prédák háza',
-      completed: false,
-      priority: 'Közepes',
-      dueDate: new Date().toISOString(),
-      addedDate: new Date().toISOString()
-    },
-    {
-      id: 3,
-      title: 'Démoni ketrec',
-      completed: false,
-      priority: 'Közepes',
-      dueDate: new Date().toISOString(),
-      addedDate: new Date().toISOString()
-    }
-  ];
+  konyvek: TBR[] = [];
+
+  constructor(private tbrService: TBRService) {}
 
   ngOnInit(): void {
-    this.konyvek = this.konyvek.map(konyv => {
-      const date = new Date();
-      date.setDate(date.getDate());
-      return {
-        ...konyv,
-        dueDate: date.toISOString()
-      };
+    this.tbrService.getAllBooks().subscribe(books => {
+      this.konyvek = books;
     });
   }
 
   addBook(): void {
     if (this.newBookName.trim()) {
-      const newBook: TBR = {
-        id: Date.now(), // Use timestamp for unique ID
+      const taskData = {
         title: this.newBookName.trim(),
         completed: false,
         priority: this.newBookPriority,
         dueDate: new Date().toISOString(),
         addedDate: new Date().toISOString()
       };
-      
-      this.konyvek.unshift(newBook); // Add to beginning of array
-      this.bookAdded.emit(newBook);
-      this.newBookName = '';
+
+      this.tbrService.addBook(taskData).then(newBook => {
+        this.bookAdded.emit(newBook);
+        this.newBookName = '';
+      });
     }
   }
 
   deleteBook(id: number): void {
-    this.konyvek = this.konyvek.filter(konyv => konyv.id !== id);
+    this.konyvek = this.konyvek.filter(k => k.id !== id);
+    this.tbrService.removeTaskById(id); // Ezt a metódust külön létre kell hozni, lásd lent.
   }
 
   toggleBookCompletion(konyv: TBR): void {
     konyv.completed = !konyv.completed;
+    this.tbrService.updateTaskCompletion(konyv.id, konyv.completed); // ezt is létrehozzuk lent
   }
 
   trackById(index: number, item: TBR): number {
@@ -101,15 +68,15 @@ export class TBRComponent implements OnInit {
   }
 
   getCompletedBooks(): number {
-    return this.konyvek.filter(konyv => konyv.completed).length;
+    return this.konyvek.filter(k => k.completed).length;
   }
 
   getPendingBooks(): number {
-    return this.konyvek.filter(konyv => !konyv.completed).length;
+    return this.konyvek.filter(k => !k.completed).length;
   }
 
   getPriorityIcon(priority: string): string {
-    switch(priority) {
+    switch (priority) {
       case 'Magas': return '🔥';
       case 'Közepes': return '⚠️';
       case 'Alacsony': return '🌿';
@@ -121,6 +88,6 @@ export class TBRComponent implements OnInit {
     const addedDate = new Date(konyv.addedDate);
     const now = new Date();
     const diffDays = Math.floor((now.getTime() - addedDate.getTime()) / (1000 * 60 * 60 * 24));
-    return diffDays < 3; // New if added in last 3 days
+    return diffDays < 3;
   }
 }

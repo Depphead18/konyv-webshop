@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -32,6 +34,9 @@ export class ProfileComponent implements OnInit {
       avatar: 'KJ'
     }
   ];
+
+  constructor(private authService: AuthService, private router: Router) {}
+
   
   selectedIndex: number = 0;
 
@@ -50,7 +55,9 @@ export class ProfileComponent implements OnInit {
     this.selectedIndex = index;
   }
 
-  logout() {
-    // Kijelentkezési 
-  }
+  logout(): void {
+  this.authService.signOut().then(() => {
+    this.router.navigateByUrl('/home');
+  });
+}
 }

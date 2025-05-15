@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule,
+  standalone: true,
+  imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -18,31 +22,64 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterLink],
+    RouterLink
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  email = new FormControl('');
-  password = new FormControl('');
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   isLoading: boolean = false;
   loginError: string = '';
   showLoginForm: boolean = true;
+  authSubscription?: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
-    this.loginError = '';
-  
-    if (this.email.value === 'test@gmail.com' && this.password.value === 'asd') {
-      this.isLoading = true;
-      this.showLoginForm = false;
-  
-      localStorage.setItem('isLoggedIn', 'true');
-
-      this.router.navigate(['/home']);
-    } else {
-      this.loginError = 'Hibás e-mail vagy jelszó!';
+    if (this.email.invalid || this.password.invalid) {
+      this.loginError = 'Kérlek töltsd ki helyesen az adatokat';
+      return;
     }
+
+    const emailValue = this.email.value ?? '';
+    const passwordValue = this.password.value ?? '';
+
+    this.isLoading = true;
+    this.showLoginForm = false;
+    this.loginError = '';
+
+    this.authService.signIn(emailValue, passwordValue)
+      .then(userCredential => {
+        console.log('Sikeres bejelentkezés:', userCredential.user);
+        this.router.navigateByUrl('/home');
+      })
+      .catch(error => {
+        console.error('Bejelentkezési hiba:', error);
+        this.isLoading = false;
+        this.showLoginForm = true;
+
+        switch (error.code) {
+          case 'auth/user-not-found':
+            this.loginError = 'Nincs ilyen fiók';
+            break;
+          case 'auth/wrong-password':
+            this.loginError = 'Hibás jelszó';
+            break;
+          case 'auth/invalid-credential':
+            this.loginError = 'Érvénytelen hitelesítési adatok';
+            break;
+          default:
+            this.loginError = `Hiba: ${error.message}`;
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
   }
 }
