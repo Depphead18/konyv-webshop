@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../shared/services/user.service';
 import { User } from '../../shared/users/User';
 import { TBR } from '../../shared/models/TBR';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile',
@@ -27,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   
   private subscription: Subscription | null = null;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -62,4 +65,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     
     return firstInitial + (lastInitial ? lastInitial : '');
   }
+
+  logout(): void {
+  this.authService.signOut().then(() => {
+    this.router.navigate(['/home']); // vagy más oldalra irányítás
+  }).catch(error => {
+    console.error('Kijelentkezési hiba:', error);
+  });
+}
+
 }

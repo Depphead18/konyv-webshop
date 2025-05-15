@@ -1,34 +1,61 @@
+<main>
 <div class="profile-container">
-  <mat-card>
+  <mat-card class="profile-card">
     <mat-card-header>
-      <mat-card-title>User Profile</mat-card-title>
+      <div class="header-content">
+        <mat-card-title>Személyes profil</mat-card-title>
+      </div>
     </mat-card-header>
+
     <mat-card-content>
-      @if (isLoading) {
+      <ng-container *ngIf="isLoading; else loadedProfile">
         <div class="loading-container">
-          <p>Loading profile data...</p>
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          <p>Adatok betöltése folyamatban...</p>
         </div>
-      } @else if (user) {
-        <div class="profile-info">
-          <div class="avatar-container">
-            <div class="avatar mat-elevation-z2">
-              {{ getInitials() }}
+      </ng-container>
+
+      <ng-template #loadedProfile>
+        <ng-container *ngIf="user; else noUser">
+          <div class="profile-info">
+            <div class="avatar-container">
+              <div class="avatar mat-elevation-z4">
+                {{ getInitials() }}
+              </div>
+            </div>
+
+            <div class="user-details">
+              <h3 class="user-name">{{ user.name.firstname }} {{ user.name.lastname }}</h3>
+
+              <div class="user-contact">
+                <div class="user-email">
+                  <mat-icon>email</mat-icon>
+                  <span>{{ user.email }}</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="user-details">
-            <h3 class="user-name">{{ user.name.firstname }} {{ user.name.lastname }}</h3>
-            <div class="user-email">
-              <mat-icon>email</mat-icon>
-              <span>{{ user.email }}</span>
-            </div>
+
+          <div class="action-buttons">
+            <button mat-flat-button color="primary" class="modern-button">
+              <mat-icon>edit</mat-icon>
+              Profil szerkesztése
+            </button>
+            <button mat-flat-button color="warn" class="modern-button">
+              <mat-icon>logout</mat-icon>
+              Kijelentkezés
+            </button>
           </div>
-        </div>
-      } @else {
-        <div class="empty-state">
-          <mat-icon>person_off</mat-icon>
-          <p>No user profile found. Please log in.</p>
-        </div>
-      }
+        </ng-container>
+
+        <ng-template #noUser>
+          <div class="empty-state">
+            <mat-icon>person_off</mat-icon>
+            <p>Nincs elérhető felhasználói profil. Jelentkezz be.</p>
+          </div>
+        </ng-template>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </div>
+</main>
