@@ -1,45 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Firestore, collection, collectionData, addDoc, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { TBR } from '../models/TBR';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TBRService {
-  private konyvek: TBR[] = [
-    { id: 1, title: 'Az aratás hajnala', completed: false, priority: 'Magas', dueDate: new Date().toISOString(), addedDate: new Date().toISOString() },
-    { id: 2, title: 'Prédák háza', completed: false, priority: 'Közepes', dueDate: new Date().toISOString(), addedDate: new Date().toISOString() },
-    { id: 3, title: 'Démoni ketrec', completed: false, priority: 'Közepes', dueDate: new Date().toISOString(), addedDate: new Date().toISOString() }
-  ];
-
-  private booksSubject = new BehaviorSubject<TBR[]>(this.konyvek);
-
-  constructor() {}
+  constructor(private firestore: Firestore) {}
 
   getAllBooks(): Observable<TBR[]> {
-    return this.booksSubject.asObservable();
+    const booksRef = collection(this.firestore, 'books');
+    return collectionData(booksRef, { idField: 'id' }) as Observable<TBR[]>;
   }
 
   addBook(book: Omit<TBR, 'id'>): Promise<TBR> {
-    return new Promise((resolve) => {
-      const newId = this.konyvek.length > 0 ? Math.max(...this.konyvek.map(t => t.id)) + 1 : 1;
-      const newBook: TBR = { ...book, id: newId };
-      this.konyvek.push(newBook);
-      this.booksSubject.next([...this.konyvek]);
-      setTimeout(() => resolve(newBook), 1000);
+    const booksRef = collection(this.firestore, 'books');
+    return addDoc(booksRef, book).then(docRef => {
+      return { ...book, id: docRef.id }; // a Firestore generálja az ID-t
     });
   }
 
-  removeTaskById(id: number): void {
-    this.konyvek = this.konyvek.filter(book => book.id !== id);
-    this.booksSubject.next([...this.konyvek]);
+  removeTaskById(id: number | string): void {
+    const bookDocRef = doc(this.firestore, `books/${id}`);
+    deleteDoc(bookDocRef);
   }
 
-  updateTaskCompletion(id: number, completed: boolean): void {
-    const index = this.konyvek.findIndex(book => book.id === id);
-    if (index !== -1) {
-      this.konyvek[index].completed = completed;
-      this.booksSubject.next([...this.konyvek]);
-    }
+  updateTaskCompletion(id: number | string, completed: boolean): void {
+    const bookDocRef = doc(this.firestore, `books/${id}`);
+    updateDoc(bookDocRef, { completed });
   }
 }

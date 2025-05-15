@@ -1,8 +1,8 @@
 export interface TBR {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
   priority: 'Magas' | 'Közepes' | 'Alacsony';
-  dueDate: string;
   addedDate: string;
+  userId: string;
 }
