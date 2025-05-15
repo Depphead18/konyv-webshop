@@ -7,7 +7,8 @@ import { HighlightOnHoverDirective } from '../../shared/directives/appHighlightO
 import { TBRService } from '../../shared/services/tbr-service.service';
 import { TBR } from '../../shared/models/TBR';
 import { AuthService } from '../../shared/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { query, where, orderBy, collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tbr',
@@ -32,24 +33,25 @@ export class TBRComponent implements OnInit, OnDestroy {
   constructor(private tbrService: TBRService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
+  this.isLoading = true;
 
-    this.subscription = this.authService.currentUser.subscribe(user => {
-      this.userId = user?.uid || null;
+  this.subscription = this.authService.currentUser.subscribe(user => {
+    this.userId = user?.uid || null;
 
-      if (this.userId) {
-        this.tbrService.getAllBooks().subscribe(books => {
-          this.konyvek = books.filter(b => b.userId === this.userId);
-          this.isLoading = false;
-        }, () => {
-          this.isLoading = false;
-        });
-      } else {
-        this.konyvek = [];
+    if (this.userId) {
+      this.tbrService.getBooksByUser(this.userId).subscribe(books => {
+        this.konyvek = books;
         this.isLoading = false;
-      }
-    });
-  }
+      }, () => {
+        this.isLoading = false;
+      });
+    } else {
+      this.konyvek = [];
+      this.isLoading = false;
+    }
+  });
+}
+
 
   addBook(): void {
     if (this.newBookName.trim() && this.userId) {

@@ -6,7 +6,6 @@ $button-color: #C6AD94;
 
 
 .books {
-    padding: 40px;
     background-color: $button-color;
     
     h1{
@@ -113,4 +112,39 @@ $button-color: #C6AD94;
       }
       }    
     }
+    
   }
+
+.filter-bar {
+  margin-bottom: 0px;
+  margin-top: 50px;
+  margin-left: 40px;
+  text-align: left;        // hogy a tartalom balra legyen igazítva
+  max-width: 300px;        // vagy egy neked tetsző max szélesség
+  width: 100%;
+}
+
+.sort-select {
+  width: 280px;
+  max-width: 100%;
+
+  ::ng-deep .mat-form-field-flex {
+    background-color: #f7f2ed;
+    border-radius: 8px;
+  }
+
+  ::ng-deep .mat-select-trigger {
+    color: #5a3e1b;
+    font-weight: 600;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    color: #a37b52;
+    font-weight: 500;
+  }
+
+  ::ng-deep .mat-select-panel {
+    border-radius: 8px;
+    background-color: #fdf9f6;
+  }
+}

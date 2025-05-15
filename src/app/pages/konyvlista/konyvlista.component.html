@@ -1,21 +1,37 @@
-  <section class="books">
-    <h1>Kínálatunk</h1>
-  
-      <section class="books-grid">
-        <div class="book-card" *ngFor="let book of books">
-          <mat-card class="example-card" appearance="outlined">
-            <img *ngIf="book.image" mat-card-image [src]="book.image" [alt]="book.title" />
-            <mat-card-header>
-              <mat-card-title>{{ book.title }}</mat-card-title>
-              <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{book.price}} FT</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button color="primary">RÉSZLETEK</button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-      </section>
+<main>
+<section class="books">
+  <h1>Kínálatunk</h1>
+
+  <!-- Szűrősáv a cím alatt -->
+  <section class="filter-bar" style="margin-bottom: 20px; display: flex; justify-content: center;">
+    <mat-form-field appearance="fill" class="sort-select">
+      <mat-label>Rendezés</mat-label>
+      <mat-select [(ngModel)]="selectedSort" (selectionChange)="onSortChange()">
+        <mat-option value="az">Cím szerint A-Z</mat-option>
+        <mat-option value="za">Cím szerint Z-A</mat-option>
+        <mat-option value="priceAsc">Ár szerint (olcsótól a drágáig)</mat-option>
+        <mat-option value="priceDesc">Ár szerint (drágától az olcsóig)</mat-option>
+      </mat-select>
+    </mat-form-field>
   </section>
+
+  <section class="books-grid">
+    <div class="book-card" *ngFor="let book of books">
+      <mat-card class="example-card" appearance="outlined">
+        <img *ngIf="book.image" mat-card-image [src]="book.image" [alt]="book.title" />
+        <mat-card-header>
+          <mat-card-title>{{ book.title }}</mat-card-title>
+          <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{book.price}} FT</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">RÉSZLETEK</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+</section>
+
+</main>

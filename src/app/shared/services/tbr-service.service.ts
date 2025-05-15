@@ -1,5 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  query,
+  where,
+  orderBy,
+  limit,
+  serverTimestamp
+} from '@angular/fire/firestore';
 import { TBR } from '../models/TBR';
 import { Observable } from 'rxjs';
 
@@ -9,25 +22,51 @@ import { Observable } from 'rxjs';
 export class TBRService {
   constructor(private firestore: Firestore) {}
 
-  getAllBooks(): Observable<TBR[]> {
+  getBooksByUser(userId: string): Observable<TBR[]> {
     const booksRef = collection(this.firestore, 'books');
-    return collectionData(booksRef, { idField: 'id' }) as Observable<TBR[]>;
+    const q = query(booksRef, where('userId', '==', userId));
+    return collectionData(q, { idField: 'id' }) as Observable<TBR[]>;
   }
 
   addBook(book: Omit<TBR, 'id'>): Promise<TBR> {
     const booksRef = collection(this.firestore, 'books');
-    return addDoc(booksRef, book).then(docRef => {
-      return { ...book, id: docRef.id }; // a Firestore generálja az ID-t
+
+    const bookWithTimestamp = {
+      ...book,
+      addedDate: serverTimestamp() as unknown as any // workaround a típuskezelésre
+    };
+
+    return addDoc(booksRef, bookWithTimestamp).then(docRef => {
+      return { ...book, id: docRef.id };  // itt az addedDate már a szerver oldali lesz lekérdezésnél
     });
   }
 
-  removeTaskById(id: number | string): void {
-    const bookDocRef = doc(this.firestore, `books/${id}`);
-    deleteDoc(bookDocRef);
+
+  // FIRESTORE LEKÉRDEZÉS
+
+  getRecentBooksByUser(userId: string): Observable<TBR[]> {
+    const booksRef = collection(this.firestore, 'books');
+    const q = query(
+      booksRef,
+      where('userId', '==', userId),
+      where('addedDate', '!=', null), // csak azok a könyvek, amiknél van addedDate
+      orderBy('addedDate', 'desc'),
+      limit(10)
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<TBR[]>;
   }
 
-  updateTaskCompletion(id: number | string, completed: boolean): void {
+
+  removeTaskById(id: string): Promise<void> {
     const bookDocRef = doc(this.firestore, `books/${id}`);
-    updateDoc(bookDocRef, { completed });
+    return deleteDoc(bookDocRef);
   }
+
+  updateTaskCompletion(id: string, completed: boolean): Promise<void> {
+    const bookDocRef = doc(this.firestore, `books/${id}`);
+    return updateDoc(bookDocRef, { completed });
+  }
+
+  
+
 }
