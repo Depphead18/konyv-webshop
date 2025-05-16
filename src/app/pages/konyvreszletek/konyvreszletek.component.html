@@ -15,6 +15,7 @@
       <div class="actions">
         <button (click)="addToCart()">Kosárba</button>
         <button routerLink="/konyvlista">Vissza a listához</button>
+        <button [routerLink]="['/konyv/szerkesztes', book.id]">Szerkesztés</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, query, orderBy, limit, doc, docData } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, query, orderBy, limit, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { Book } from '../models/Book';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { collection as col, DocumentReference } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
@@ -25,5 +25,10 @@ export class BookService {
   getBookById(id: string): Observable<Book> {
     const bookDoc = doc(this.firestore, `konyvek/${id}`);
     return docData(bookDoc, { idField: 'id' }) as Observable<Book>;
+  }
+
+  updateBook(id: string, book: Book): Observable<void> {
+    const bookDoc = doc(this.firestore, `konyvek/${id}`);
+    return from(updateDoc(bookDoc, { ...book }));
   }
 }

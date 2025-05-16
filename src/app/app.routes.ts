@@ -44,6 +44,10 @@ export const routes: Routes = [
         path: 'konyv/:id',
         loadComponent: () => import('./pages/konyvreszletek/konyvreszletek.component').then(m => m.KonyvReszletekComponent)
     },
+    { 
+        path: 'konyv/szerkesztes/:id', 
+        loadComponent: () => import('./pages/konyvszerkesztes/konyvszerkesztes.component').then(m => m.KonyvSzerkesztesComponent)
+    },
     {
         path: '',
         redirectTo: 'home',
