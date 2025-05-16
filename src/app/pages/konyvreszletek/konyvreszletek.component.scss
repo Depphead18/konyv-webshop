@@ -33,7 +33,7 @@
   flex-direction: column;
 
   .title {
-    font-size: 2rem;
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 8px;
   }
@@ -45,14 +45,14 @@
   }
 
   .price {
-    font-size: 1.6rem;
+    font-size: 40px;
     font-weight: 600;
     color: #8b4513;
     margin-bottom: 16px;
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 20px;
     line-height: 1.5;
     margin-bottom: 20px;
     color: #444;
@@ -71,23 +71,23 @@
       padding: 10px 16px;
       border: none;
       cursor: pointer;
-      background-color: #3f51b5;
+      background-color: #8b4513;
       color: white;
       transition: background-color 0.3s ease;
     }
 
     button:last-child {
       background-color: transparent;
-      color: #3f51b5;
-      border: 1px solid #3f51b5;
+      color: #8b4513;
+      border: 1px solid #8b4513;
     }
 
     button:hover {
-      background-color: #303f9f;
+      background-color: #562b0d;
     }
 
     button:last-child:hover {
-      background-color: #3f51b5;
+      background-color: #562b0d;
       color: white;
     }
   }

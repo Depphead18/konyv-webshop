@@ -8,9 +8,13 @@
       <h1 class="title">{{ book.title }}</h1>
       <h2 class="author">{{ book.author }}</h2>
 
-      <p class="price">{{ book.price | number }} Ft</p>
+      
       <p class="description">{{ book.description || 'Nincs megadva leírás.' }}</p>
-      <p *ngIf="book.megjelenesDatuma"><strong>Megjelenési év:</strong> {{ book.megjelenesDatuma }}</p>
+      <p *ngIf="book.megjelenesDatuma" style="margin-bottom: 15px; font-size: 20px;"><strong>Megjelenési év:</strong> {{ book.megjelenesDatuma }}</p>
+      <p *ngIf="book.genre" style="margin-bottom: 15px; font-size: 20px;"><strong>Műfaj:</strong> {{ book.genre }}</p>
+      <p *ngIf="book.kiado" style="margin-bottom: 15px; font-size: 20px;"><strong>Kiadó:</strong> {{ book.kiado }}</p>
+
+      <p class="price">{{ book.price | number }} Ft</p>
 
       <div class="actions">
         <button (click)="addToCart()">Kosárba</button>

@@ -6,4 +6,6 @@ export interface Book {
   image: string;
   description?: string;
   megjelenesDatuma: number;
+  genre: string;
+  kiado: string
 }
