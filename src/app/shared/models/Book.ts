@@ -1,8 +1,9 @@
 export interface Book {
-  id?: string;      // opcionális, Firestore doc ID
+  id?: string;
   title: string;
   author: string;
   price: number;
   image: string;
-  description?: string;  // opcionális, rövid leírás
+  description?: string;
+  megjelenesDatuma: number;
 }

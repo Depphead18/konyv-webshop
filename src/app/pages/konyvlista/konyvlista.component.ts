@@ -8,12 +8,13 @@ import { collectionData } from '@angular/fire/firestore';
 import { Firestore, collection, query, orderBy } from '@angular/fire/firestore';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-konyvlista',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatFormFieldModule, MatSelectModule, FormsModule],
+  imports: [CommonModule, MatCardModule, MatFormFieldModule, MatSelectModule, FormsModule, RouterModule],
   templateUrl: './konyvlista.component.html',
   styleUrls: ['./konyvlista.component.scss']
 })

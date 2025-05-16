@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard, publicGuard } from './shared/guards/auth.guard';
 
+
 export const routes: Routes = [
     {
         path: 'home',
@@ -30,11 +31,6 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/konyvlista/konyvlista.component').then(m => m.KonyvlistaComponent),
     },
     {
-        path: 'konyvreszletek',
-        title: 'Részletek',
-        loadComponent: () => import('./pages/konyvreszletek/konyvreszletek.component').then(m => m.KonyvreszletekComponent),
-    },
-    {
         path: 'login',
         loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
     },
@@ -43,6 +39,10 @@ export const routes: Routes = [
         title: 'Kosár',
         loadComponent: () => import('./pages/kosar/kosar.component').then(m => m.KosarComponent),
         canActivate: [authGuard]
+    },
+    {
+        path: 'konyv/:id',
+        loadComponent: () => import('./pages/konyvreszletek/konyvreszletek.component').then(m => m.KonyvReszletekComponent)
     },
     {
         path: '',

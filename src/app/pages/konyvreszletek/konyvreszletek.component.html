@@ -1,3 +1,25 @@
-<div class="page">
-    <p>konyvreszletek works!</p>
-</div>
+<main class="book-details-container" *ngIf="book; else loading">
+  <div class="book-card">
+    <div class="image-container">
+      <img [src]="book.image" [alt]="book.title" />
+    </div>
+
+    <div class="details-container">
+      <h1 class="title">{{ book.title }}</h1>
+      <h2 class="author">{{ book.author }}</h2>
+
+      <p class="price">{{ book.price | number }} Ft</p>
+      <p class="description">{{ book.description || 'Nincs megadva leírás.' }}</p>
+      <p *ngIf="book.megjelenesDatuma"><strong>Megjelenési év:</strong> {{ book.megjelenesDatuma }}</p>
+
+      <div class="actions">
+        <button (click)="addToCart()">Kosárba</button>
+        <button routerLink="/konyvlista">Vissza a listához</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<ng-template #loading>
+  <p>Betöltés...</p>
+</ng-template>
