@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CartService } from '../../shared/services/cart.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-konyvreszletek',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule],
   templateUrl: './konyvreszletek.component.html',
   styleUrls: ['./konyvreszletek.component.scss']
 })
