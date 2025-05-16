@@ -5,7 +5,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/konyv-webshop/browser",
+    "public": "dist/konyv-webshop",
     "ignore": [
       "firebase.json",
       "**/.*",
