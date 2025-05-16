@@ -4,20 +4,23 @@
 
     <div *ngFor="let book of cartBooks" class="book-card">
       <mat-card>
-        <div class="card-content">
-          <img [src]="book.image" alt="{{ book.title }}" />
-          <div class="info">
+        <div class="card-content" style="display:flex; gap: 16px; align-items:center;">
+          <img [src]="book.image" alt="{{ book.title }}" width="80" />
+          <div class="info" style="flex-grow:1;">
             <h3>{{ book.title }}</h3>
             <p>{{ book.author }}</p>
-            <p class="price">{{ book.price | currency:'HUF ' }}</p>
+            <p class="price">{{ book.price | number }} Ft</p>
           </div>
+          <button mat-icon-button color="warn" aria-label="Törlés" (click)="removeBook(book)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </mat-card>
       <mat-divider></mat-divider>
     </div>
 
-    <div class="summary">
-      <h3>Végösszeg: <span>{{ totalPrice | currency:'HUF ' }}</span></h3>
+    <div class="summary" style="margin-top:20px;">
+      <h3>Végösszeg: <span>{{ totalPrice | number }} Ft</span></h3>
       <button mat-flat-button color="primary" (click)="fizetes()">Fizetés</button>
     </div>
   </div>

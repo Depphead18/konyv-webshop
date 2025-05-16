@@ -5,6 +5,7 @@ import { Book } from '../../shared/models/Book';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-konyvreszletek',
@@ -16,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class KonyvReszletekComponent implements OnInit {
   book?: Book;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService) {}
+  constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -27,9 +28,10 @@ export class KonyvReszletekComponent implements OnInit {
     }
   }
 
-  addToCart() {
-    // Ide jöhet a kosárba helyezés logika
-    console.log('Kosárba helyezve:', this.book?.title);
+  addToCart(): void {
+    if (this.book) {
+      this.cartService.addBook(this.book);
+      alert(`"${this.book.title}" hozzáadva a kosárhoz!`);
+    }
   }
-
 }
