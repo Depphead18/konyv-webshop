@@ -26,3 +26,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 button{
     cursor: pointer;
 }
+
+mat-toolbar {
+  background-color: $button-color;
+  color: white;
+}

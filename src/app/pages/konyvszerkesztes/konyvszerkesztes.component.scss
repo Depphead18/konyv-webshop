@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-color: #8b4513;
 $secondary-color: #CBBEB3;
 $text-color: #333;
@@ -39,7 +41,7 @@ $button-color: #C6AD94;
 
     input, textarea {
       padding: 0.7rem;
-      border: 1px solid darken($secondary-color, 10%);
+      border: 1px solid color.adjust($secondary-color, $lightness: -10%);
       border-radius: 4px;
       font-size: 1rem;
       transition: border-color 0.3s;
@@ -69,11 +71,11 @@ $button-color: #C6AD94;
     margin-top: 0.5rem;
 
     &:hover {
-      background-color: darken($button-color, 10%);
+        background-color: color.adjust($button-color, $lightness: -10%);
     }
 
     &:active {
-      background-color: darken($button-color, 15%);
+      background-color: color.adjust($button-color, $lightness: -15%)
     }
   }
 }

@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+@use "sass:color";
 
-$primary-color: #5e3a1f;
-$secondary-color: #d7ccc8;
-$accent-color: #8d6e63;
-$text-color: #4e342e;
-$light-text: #efebe9;
-$background-color: #fff9f6;
-$button-color: #a1887f;
+$primary-color: #8b4513;
+$secondary-color: #CBBEB3;
+$text-color: #333;
+$background-color: #fff;
+$button-color: #C6AD94;
 $completed-color: #81c784;
+
+
+
 
 .container {
     max-width: 900px;
@@ -18,6 +19,8 @@ $completed-color: #81c784;
     padding: 30px;
     font-family: 'Roboto', sans-serif;
 }
+
+
 
 .header {
     display: flex;
@@ -42,7 +45,7 @@ $completed-color: #81c784;
         
         .book-icon {
             font-size: 28px;
-            color: $accent-color;
+            color: $button-color;
         }
     }
 }
@@ -62,7 +65,7 @@ $completed-color: #81c784;
         transition: border-color 0.3s;
         
         &:focus {
-            border-color: $accent-color;
+            border-color: $button-color;
             outline: none;
         }
     }
@@ -77,7 +80,7 @@ $completed-color: #81c784;
     }
     
     button {
-        background-color: $accent-color;
+        background-color: $button-color;
         color: white;
         border: none;
         border-radius: 8px;
@@ -91,11 +94,11 @@ $completed-color: #81c784;
         gap: 8px;
         
         &:hover {
-            background-color: darken($accent-color, 10%);
+            background-color: color.adjust($button-color, $lightness: -10%);
         }
         
         &:disabled {
-            background-color: lighten($accent-color, 20%);
+            background-color: color.adjust($button-color, $lightness: 20%);
             cursor: not-allowed;
         }
         
@@ -148,7 +151,7 @@ table {
     
     td {
         padding: 15px;
-        border-bottom: 1px solid lighten($secondary-color, 5%);
+        border-bottom: 1px solid color.adjust($secondary-color, $lightness: 5%);
         color: $text-color;
         transition: background-color 0.2s;
     }
@@ -157,14 +160,14 @@ table {
         background-color: rgba($completed-color, 0.1);
         
         td {
-            color: lighten($text-color, 30%);
+            color: color.adjust($button-color, $lightness: 30%);
         }
     }
     
     .empty-message {
         text-align: center;
         padding: 30px;
-        color: lighten($text-color, 20%);
+        color: color.adjust($text-color, $lightness: 20%);
         font-style: italic;
     }
 }
@@ -248,7 +251,7 @@ table {
 
 .completed {
     text-decoration: line-through;
-    color: lighten($text-color, 40%);
+    color: color.adjust($button-color, $lightness: 40%);
 }
 
 .new-badge {

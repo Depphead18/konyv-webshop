@@ -4,9 +4,10 @@ $text-color: #333;
 $background-color: #fff;
 $button-color: #C6AD94;
 
-
 .books {
-    background-color: $button-color;
+    background-color: $button-color !important;
+    margin: 0;
+    padding: 0;
     
     h1{
       font-size: 50px;
@@ -21,8 +22,8 @@ $button-color: #C6AD94;
   
     .books-grid {
       display: grid;
-      gap: 24px;
-      padding: 32px;
+      gap: 30px;
+      padding: 0px;
       justify-items: center;
 
       @media (min-width: 600px) {
@@ -43,7 +44,7 @@ $button-color: #C6AD94;
         border-radius: 12px;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease;
-        margin: 0 auto;
+        margin: 0 !important;
         max-width: 280px;
 
         @media (min-width: 500px) {
@@ -147,4 +148,9 @@ $button-color: #C6AD94;
     border-radius: 8px;
     background-color: #fdf9f6;
   }
+}
+
+
+.books hr {
+    display: none;
 }
