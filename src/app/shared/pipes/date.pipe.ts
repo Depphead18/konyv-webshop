@@ -5,20 +5,33 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class DateFormatterPipe implements PipeTransform {
-  transform(value: string): string {
+  transform(value: any): string {
     if (!value) return '';
 
     try {
-      const date = new Date(value);
+      // Ellenőrizzük, hogy Firestore Timestamp-e
+      let date: Date;
+
+      if (value instanceof Date) {
+        date = value;
+      } else if (value.seconds && value.nanoseconds) {
+        // Firestore Timestamp → Date
+        date = new Date(value.seconds * 1000);
+      } else if (typeof value === 'string' || typeof value === 'number') {
+        date = new Date(value);
+      } else {
+        return value;
+      }
+
       if (isNaN(date.getTime())) {
         return value;
       }
-      
+
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
-      
-      return `${year}-${month}-${day}`;
+
+      return `${year}-${month}-${day}`; // vagy `${year}.${month}.${day}`
     } catch (error) {
       return value;
     }
