@@ -9,13 +9,11 @@ export class DateFormatterPipe implements PipeTransform {
     if (!value) return '';
 
     try {
-      // Ellenőrizzük, hogy Firestore Timestamp-e
       let date: Date;
 
       if (value instanceof Date) {
         date = value;
       } else if (value.seconds && value.nanoseconds) {
-        // Firestore Timestamp → Date
         date = new Date(value.seconds * 1000);
       } else if (typeof value === 'string' || typeof value === 'number') {
         date = new Date(value);
@@ -31,7 +29,7 @@ export class DateFormatterPipe implements PipeTransform {
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
 
-      return `${year}-${month}-${day}`; // vagy `${year}.${month}.${day}`
+      return `${year}-${month}-${day}`;
     } catch (error) {
       return value;
     }

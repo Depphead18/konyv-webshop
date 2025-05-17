@@ -9,7 +9,7 @@
           <div class="info" style="flex-grow:1;">
             <h3>{{ book.title }}</h3>
             <p>{{ book.author }}</p>
-            <p class="price">{{ book.price | number }} Ft</p>
+            <p class="price">{{ book.price | priceWithCurrency }}</p>
           </div>
           <button mat-icon-button color="warn" aria-label="Törlés" (click)="removeBook(book)">
             <mat-icon>delete</mat-icon>

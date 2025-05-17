@@ -6,11 +6,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CartService } from '../../shared/services/cart.service';
 import { Book } from '../../shared/models/Book';
 import { MatIconModule } from '@angular/material/icon';
+import { PriceWithCurrencyPipe } from '../../shared/pipes/price-with-currency.pipe';
 
 @Component({
   selector: 'app-kosar',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDividerModule, MatIconModule, PriceWithCurrencyPipe],
   templateUrl: './kosar.component.html',
   styleUrls: ['./kosar.component.scss']
 })
