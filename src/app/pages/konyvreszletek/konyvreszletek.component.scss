@@ -14,6 +14,10 @@
   align-items: flex-start;
   width: 50%;
   height: fit-content;
+  max-width: 1200px; /* Új */
+  word-wrap: break-word; /* Új */
+  overflow-wrap: break-word; /* Új */
+  
 }
 
 .image-container {
@@ -93,17 +97,109 @@
   }
 }
 
-/* === RESPONSIVE === */
+
+
+/* === LARGE SCREENS (1024px and above) === */
+@media (min-width: 1024px) {
+  section{
+    height: 150%;
+  }
+
+  .book-card {
+    width: 70%;
+  }
+}
+
+
+/* === ZOOM PROTECTION (1024px-1280px with zoom) === */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .book-card {
+    width: 80%;
+  }
+  
+  .details-container {
+    .title {
+      font-size: 2rem;
+    }
+    
+    .price {
+      font-size: 2rem;
+    }
+    
+    .description,
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+
+/* === TABLET (768px - 1024px) === */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .book-details-container {
+    padding: 15px;
+  }
+
+  section{
+    height: fit-content;
+  }
+
+  .book-card {
+    width: 85%;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .image-container {
+    flex: 0 0 250px;
+  }
+
+  .details-container {
+    .title {
+      font-size: 1.8rem;
+    }
+
+    .author {
+      font-size: 1.1rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+    }
+
+    .description,
+    p {
+      font-size: 1rem;
+    }
+
+    .actions {
+      flex-wrap: nowrap;
+      
+      button {
+        min-width: auto;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* === MOBILE (<768px) === */
 @media (max-width: 768px) {
   .book-details-container {
     padding: 8px;
   }
 
+  section{
+    height: fit-content;
+  }
+
   .book-card {
     flex-direction: column;
-    width: 95%;       // <-- ez lett 100% helyett 95%, hogy "szélesebbnek" hasson
+    width: 95%;
     padding: 16px;
-    margin: 0 auto;   // <-- középre igazítjuk
+    margin: 0 auto;
   }
 
   .image-container {
