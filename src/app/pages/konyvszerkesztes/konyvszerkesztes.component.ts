@@ -23,6 +23,8 @@ export class KonyvSzerkesztesComponent implements OnInit {
     description: new FormControl(''),
     megjelenesDatuma: new FormControl(null),
     image: new FormControl(''),
+    genre: new FormControl(''),
+    kiado: new FormControl(''),
   });
 
   constructor(private route: ActivatedRoute, private bookService: BookService, private router: Router) {}
