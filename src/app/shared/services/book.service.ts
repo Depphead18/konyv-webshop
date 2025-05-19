@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, collection, query, orderBy, limit, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { Book } from '../models/Book';
 import { from, Observable } from 'rxjs';
-import { collection as col, DocumentReference } from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {

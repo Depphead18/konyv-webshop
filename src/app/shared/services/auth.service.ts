@@ -10,10 +10,9 @@ import {
 } from '@angular/fire/auth';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { User } from '../users/User';
 
-// ✅ Típus új felhasználó létrehozásához (Firestore-ba)
 type NewUserData = Omit<User, 'id'>;
 
 @Injectable({
@@ -49,7 +48,6 @@ export class AuthService {
   async signUp(email: string, password: string, userData: NewUserData): Promise<UserCredential> {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
 
-    // 👇 Új felhasználó adatainak mentése Firestore-ba
     await this.createUserData(userCredential.user.uid, {
       ...userData,
       email,

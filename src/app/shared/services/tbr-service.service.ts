@@ -49,7 +49,7 @@ export class TBRService {
     const q = query(
       booksRef,
       where('userId', '==', userId),
-      where('addedDate', '!=', null), // csak azok a könyvek, amiknél van addedDate
+      where('addedDate', '!=', null),
       orderBy('addedDate', 'desc'),
       limit(10)
     );
@@ -66,7 +66,4 @@ export class TBRService {
     const bookDocRef = doc(this.firestore, `books/${id}`);
     return updateDoc(bookDocRef, { completed });
   }
-
-  
-
 }

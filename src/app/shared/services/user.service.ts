@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, getDoc, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, collection, query, where, getDocs, updateDoc, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Observable, from, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from '../users/User';
 import { TBR } from '../models/TBR';
+import { deleteUser } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class UserService {
   getUserProfile(): Observable<{
     user: User | null,
     tbr: TBR[],
-    
   }> {
     return this.authService.currentUser.pipe(
       switchMap(authUser => {
@@ -40,7 +40,6 @@ export class UserService {
     tbr: TBR[]
   }> {
     try {
-      // Felhasználó adatainak lekérése
       const userDocRef = doc(this.firestore, 'Users', userId);
       const userSnapshot = await getDoc(userDocRef);
       
@@ -53,15 +52,11 @@ export class UserService {
 
       const userData = userSnapshot.data() as User;
       const user = { ...userData, id: userId };
-      
+
       if (!user.tbr || user.tbr.length === 0) {
-        return {
-          user,
-          tbr: []
-        };
+        return { user, tbr: [] };
       }
 
-      // Feladatok lekérése a TBR kollekcióból
       const tasksCollection = collection(this.firestore, 'tbr');
       const q = query(tasksCollection, where('id', 'in', user.tbr));
       const tasksSnapshot = await getDocs(q);
@@ -81,4 +76,20 @@ export class UserService {
       };
     }
   }
+
+
+  deleteUserProfile(): Promise<void> {
+  return this.authService.currentUser.toPromise().then(async authUser => {
+    if (!authUser) {
+      throw new Error("Nincs bejelentkezett felhasználó.");
+    }
+
+    const uid = authUser.uid;
+    const userDocRef = doc(this.firestore, 'Users', uid);
+
+    await deleteDoc(userDocRef);
+
+    await deleteUser(authUser);
+  });
+}
 }

@@ -7,8 +7,7 @@ import { HighlightOnHoverDirective } from '../../shared/directives/appHighlightO
 import { TBRService } from '../../shared/services/tbr-service.service';
 import { TBR } from '../../shared/models/TBR';
 import { AuthService } from '../../shared/services/auth.service';
-import { Observable, Subscription } from 'rxjs';
-import { query, where, orderBy, collection, collectionData } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tbr',
@@ -51,7 +50,6 @@ export class TBRComponent implements OnInit, OnDestroy {
     }
   });
 }
-
 
   addBook(): void {
     if (this.newBookName.trim() && this.userId) {

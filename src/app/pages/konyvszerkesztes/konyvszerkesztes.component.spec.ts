@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { KonyvSzerkesztesComponent } from './konyvszerkesztes.component';
 
-import { KonyvszerkesztesComponent } from './konyvszerkesztes.component';
-
-describe('KonyvszerkesztesComponent', () => {
-  let component: KonyvszerkesztesComponent;
-  let fixture: ComponentFixture<KonyvszerkesztesComponent>;
+describe('KonyvSzerkesztesComponent', () => {
+  let component: KonyvSzerkesztesComponent;
+  let fixture: ComponentFixture<KonyvSzerkesztesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [KonyvszerkesztesComponent]
+      imports: [KonyvSzerkesztesComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(KonyvszerkesztesComponent);
+    fixture = TestBed.createComponent(KonyvSzerkesztesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

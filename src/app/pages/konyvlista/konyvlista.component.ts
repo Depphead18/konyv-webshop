@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-konyvlista',
   standalone: true,
@@ -21,8 +20,7 @@ import { RouterModule } from '@angular/router';
 export class KonyvlistaComponent implements OnInit {
   books: Book[] = [];
   
-  // A szűréshez/rendezéshez szükséges változó
-  selectedSort: string = 'az';  // alapértelmezett
+  selectedSort: string = 'az';
 
   constructor(private firestore: Firestore) {}
 

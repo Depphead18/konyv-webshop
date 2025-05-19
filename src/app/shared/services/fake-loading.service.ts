@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +6,6 @@ import { Observable, Subscriber } from 'rxjs';
 export class FakeLoadingService {
 
   constructor() { }
-
-  // CRUD (Create, Read, Update, Delete)
-
-  // Promise
 
   loadingWithPromise(email: string, password: string): Promise<boolean> {
     return new Promise((resolve, reject) => {

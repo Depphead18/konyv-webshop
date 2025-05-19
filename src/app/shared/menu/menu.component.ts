@@ -29,7 +29,7 @@ export class MenuComponent {
     private authService: AuthService
   ) {
     this.isLoggedIn$ = this.authService.isLoggedIn().pipe(
-      map(user => !!user) // true, ha van bejelentkezett user
+      map(user => !!user) 
 );
 
   }
@@ -40,7 +40,7 @@ export class MenuComponent {
 
   logout() {
   this.authService.signOut().then(() => {
-    this.sidenav?.close(); // csak ha van
+    this.sidenav?.close();
   });
 }
 }
