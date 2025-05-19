@@ -18,12 +18,17 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   topBooks: Book[] = [];
+  topFantasyBooks: Book[] = [];
 
   constructor(private router: Router, private bookService: BookService) {}
 
   ngOnInit(): void {
     this.bookService.getTopBooksByDate().subscribe(data => {
       this.topBooks = data;
+    });
+
+    this.bookService.getTopRomanceBooksByDate().subscribe(data => {
+      this.topFantasyBooks = data;
     });
   }
 
